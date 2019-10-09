@@ -6,18 +6,34 @@ window.player = {
 	 audio : document.querySelector('audio'),
 	 audioData: audios,
 	 currentAudio: {},
+	 currentPlaying:0,
 	 start(){
-	 	this.currentAudio = this.audioData[0];
-		this.cover.style.background = `url('${this.currentAudio.cover}') no-repeat center center / cover`;
+	 	this.update()
+		this.audio.onended = ()=> this.next();
+
+	 },
+	 next(){
+	 	this.currentPlaying++;
+	 	if(this.currentPlaying == this.audioData.length){
+	 		this.restart()
+	 	}
+		this.update()
+		this.audio.play()
+		
+	 },
+	 update(){
+	 	this.currentAudio = this.audioData[this.currentPlaying];
+		this.cover.style.background = `url('${path(this.currentAudio.cover)}') no-repeat center center / cover`;
 		this.title.innerHTML = `${this.currentAudio.title}`;
 		this.artist.innerText = `${this.currentAudio.artist}`;
-		this.audio.src = `${player.currentAudio.audio}`;
+		this.audio.src = path(this.currentAudio.audio);
 
-		this.audio.addEventListener('ended', ()=>{
+	 },
+	 restart(){
+	 	this.currentPlaying = 0;
+	 	this.update()
+	 }
 
-		})
-
-	 } 
 }
 
 
