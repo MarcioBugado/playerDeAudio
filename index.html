@@ -14,18 +14,36 @@
 	<div id="player">
 		<h4> <i class="material-icons">equalizer</i>RocketCast</h4>
 		<div class="card">
-			<div class="card-image"></div>
+			<div class="card-image">
+				<a href="#" class="btn-floating btn-large halfway-fab"><i class="material-icons" id="play-pause">play_arrow</i></a>
+			</div>
 			<div class="card-content">
 				<h5 class="title"></h5>
 				<p class="artist"></p>
-				<audio src="" controls></audio>
+
+				<div class="row valign-wrapper">
+					<div class="col s2" id="current-duration">00:00</div>
+					<div class="col s6 range-field valign-wrapper">
+						<input type="range" step="1" min="0" max="0" id="seekbar">
+					</div>
+					<div class="col s2" id="total-duration">00:00</div>
+					<div>
+						<a href="#">
+							<i class="material-icons" id="vol">volume_up</i>
+						</a>
+					</div>
+					<div class="col s3 range-field valign-wrapper">
+						<input type="range" step="1" min="0" max="100" id="vol-control">
+					</div>
+				</div>		
+
+
+				<audio src=""></audio>
 			</div>
 		</div>	
 		</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-<script src="data.js"></script>
-<script src="player.js"></script>
-<script src="script.js"></script>
+<script src="script.js" type="module"></script>
 </body>
 </html>
