@@ -1,19 +1,41 @@
 import audios from './data.js';
-import {path} from './utils,js';
+import {path} from './utils.js';
+import elements from './playerElements.js';
 
-export default = {
+export default {
 	
-	 cover : document.querySelector('.card-image'),
-	 title : document.querySelector('.card-content h5'),
-	 artist : document.querySelector('.artist'),
-	 audio : document.querySelector('audio'),
 	 audioData: audios,
 	 currentAudio: {},
 	 currentPlaying:0,
+	 isPlaying: false,
 	 start(){
+	 	elements.get.call(this);
+	 	elements.action.call(this);
+
 	 	this.update()
 		this.audio.onended = ()=> this.next();
 
+	 },
+	 play(){
+	 	this.isPlaying = true;
+	 	this.audio.play()
+	 	this.playPause.innerText = 'pause';
+	 },
+	 pause(){
+	 	this.isPlaying = false;
+	 	this.audio.pause()
+	 	this.playPause.innerText = 'play_arrow';
+	 },
+	 tooglePlayPause(){
+	 	if(this.isPlaying){
+	 		this.pause()
+	 	}else{
+	 		this.play()
+	 	}
+	 },
+	 toogleMute(){
+	 	this.audio.muted = !this.audio.muted;
+	 	this.vol.innerText = this.audio.muted ? 'volume_down':'volume_up';
 	 },
 	 next(){
 	 	this.currentPlaying++;
@@ -29,7 +51,8 @@ export default = {
 		this.cover.style.background = `url('${path(this.currentAudio.cover)}') no-repeat center center / cover`;
 		this.title.innerHTML = `${this.currentAudio.title}`;
 		this.artist.innerText = `${this.currentAudio.artist}`;
-		this.audio.src = path(this.currentAudio.audio);
+		
+		elements.createElement.call(this, path(this.currentAudio.audio))
 
 	 },
 	 restart(){
